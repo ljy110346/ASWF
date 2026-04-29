@@ -20,7 +20,7 @@ ASWF is designed for paired multimodal spectral classification. The main compone
 ## Repository Layout
 
 ```text
-ASWF_1/
+ASWF/
 ├── ASWF/                  # Python package
 │   ├── datasets/          # Paired spectral dataset loading and preprocessing
 │   ├── losses/            # Classification and evidence decomposition losses
