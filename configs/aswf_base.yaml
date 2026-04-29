@@ -1,0 +1,83 @@
+seed: 42
+device: auto
+
+data:
+  root: data
+  diseases:
+    - example_disease
+  file_mappings:
+    example_disease:
+      ir_normal: ir_healthy.xlsx
+      raman_normal: raman_healthy.xlsx
+      ir_abnormal: ir_disease.xlsx
+      raman_abnormal: raman_disease.xlsx
+      wavenumber_ir: Wavenumber-ir.xlsx
+      wavenumber_raman: Wavenumber-raman.xlsx
+  sheet_overrides: {}
+  axis_mismatch_policy: warn
+
+cross_validation:
+  n_splits: 5
+  n_repeats: 5
+  val_ratio: 0.2
+  max_folds: null
+  train_subset_ratio: null
+
+preprocessing:
+  spectral_normalization: feature_zscore
+  normalization_eps: 1.0e-6
+
+model:
+  wavelet_name: db1
+  wavelet_mode: zero
+  J_config: 3
+  shared_dim: 64
+  private_dim: 64
+  fusion_hidden_dim: 64
+  classifier_hidden_dim: 128
+  num_classes: 2
+  perturbed_noise_std: 0.05
+  ablation: none
+  encoder:
+    hidden_channels: 32
+    num_layers: 2
+    kernel_size: 5
+    pooled_length: 8
+    projection_dim: 128
+    dropout: 0.1
+
+loss:
+  lambda_cons: 1.0
+  lambda_orth: 0.5
+  lambda_stab: 0.2
+
+training:
+  stage1:
+    batch_size: 16
+    max_epochs: 60
+    patience: 15
+    learning_rate: 0.001
+    weight_decay: 0.0001
+    num_workers: 0
+    grad_clip: 5.0
+    scheduler: cosine
+    min_delta: 1.0e-6
+  stage2:
+    batch_size: 16
+    max_epochs: 90
+    patience: 20
+    learning_rate: 0.0005
+    weight_decay: 0.0001
+    num_workers: 0
+    grad_clip: 5.0
+    scheduler: cosine
+    min_delta: 1.0e-6
+
+evaluation:
+  threshold_policy: argmax
+  tune_threshold: false
+  threshold_metric: bacc
+
+output:
+  root: outputs
+  experiment_name: aswf_main

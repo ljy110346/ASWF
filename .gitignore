@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Local configuration
+.env
+.env.*
+
+# Private data and generated artifacts
+data/**/*
+!data/.gitkeep
+!data/README.md
+outputs/
+runs/
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+*.npz
+
+# Logs and temporary files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

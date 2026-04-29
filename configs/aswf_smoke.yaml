@@ -1,0 +1,33 @@
+extends: aswf_base.yaml
+device: cpu
+
+cross_validation:
+  n_repeats: 1
+  max_folds: 1
+
+model:
+  J_config: 2
+  shared_dim: 32
+  private_dim: 32
+  fusion_hidden_dim: 32
+  classifier_hidden_dim: 64
+  encoder:
+    hidden_channels: 16
+    pooled_length: 4
+    projection_dim: 64
+
+training:
+  stage1:
+    batch_size: 8
+    max_epochs: 2
+    patience: 2
+    scheduler: none
+  stage2:
+    batch_size: 8
+    max_epochs: 2
+    patience: 2
+    learning_rate: 0.001
+    scheduler: none
+
+output:
+  experiment_name: aswf_smoke
